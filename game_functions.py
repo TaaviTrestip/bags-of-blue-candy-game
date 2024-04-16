@@ -37,7 +37,7 @@ def check_play_button(stats, play_button, mouse_x, mouse_y):
 
         
 def update_screen(game_screen, screen, player, clock, stats, play_button):
-    screen.fill(game_screen.bg_color)
+    screen.fill(game_screen.background)
     player.blit_me()
     clock.tick(30)
     if not stats.game_active:
