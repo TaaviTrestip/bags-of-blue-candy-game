@@ -1,6 +1,6 @@
 import sys
 import pygame
-
+from candy import Candy
 
 pygame.init()
 ADDCANDY = pygame.USEREVENT + 1

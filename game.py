@@ -5,8 +5,8 @@ from math import *
 from game_window import GameWindow
 from button import Button
 from player import Player
-from game_stats import GameStats
 from candy import Candy
+from game_stats import GameStats
 import game_functions as functions
 
 
