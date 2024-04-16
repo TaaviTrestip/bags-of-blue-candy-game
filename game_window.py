@@ -1,4 +1,4 @@
-class Screen:
+class GameWindow:
     
     def __init__(self):
         self.screen_width = 900
