@@ -1,5 +1,7 @@
 import pygame
 import sys
+import music
+from math import *
 from game_window import GameWindow
 from button import Button
 from player import Player
