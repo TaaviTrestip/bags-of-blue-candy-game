@@ -1,5 +1,7 @@
 import pygame
 import sys
+import music
+from math import *
 from game_window import GameWindow
 from button import Button
 from player import Player
@@ -23,8 +25,6 @@ def run_game():
         functions.check_events(game_screen, screen, player, stats, play_button)
         if stats.game_active:
             player.update()
-        else:
-            sys.exit()
             
         functions.update_screen(game_screen, screen, player, clock, stats, play_button)
         
