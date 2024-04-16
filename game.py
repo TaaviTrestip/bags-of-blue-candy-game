@@ -6,6 +6,7 @@ from game_window import GameWindow
 from button import Button
 from player import Player
 from game_stats import GameStats
+from candy import Candy
 import game_functions as functions
 
 
@@ -21,11 +22,16 @@ def run_game():
     clock = pygame.time.Clock()
     player = Player(screen)
     
+    candies = pygame.sprite.Group()
+    
     while True:
-        functions.check_events(game_screen, screen, player, stats, play_button)
+        functions.check_events(game_screen, screen, player, candies, stats, play_button)
         if stats.game_active:
             player.update()
-            
-        functions.update_screen(game_screen, screen, player, clock, stats, play_button)
+            functions.update_candies(player, candies, stats, game_screen)
+            candies.update()
+        else:
+            candies.empty()
+        functions.update_screen(game_screen, screen, player, candies, clock, stats, play_button)
         
 run_game()
