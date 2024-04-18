@@ -1,19 +1,19 @@
 import pygame
 import random
 
-class Candy(pygame.sprite.Sprite):
+class Enemy(pygame.sprite.Sprite):
     
     def __init__(self, screen, game_screen, stats):
-        super(Candy, self).__init__()
+        super(Enemy, self).__init__()
         
         self.screen = screen
         self.screen_rect = screen.get_rect()
         
-        self.candy = pygame.Surface((50, 50))
-        self.candy.fill((0, 255, 255))
-        self.rect = self.candy.get_rect()
+        self.enemy = pygame.Surface((75, 75))
+        self.enemy.fill((255, 0, 0))
+        self.rect = self.enemy.get_rect()
         
-        self.rect = self.candy.get_rect(
+        self.rect = self.enemy.get_rect(
                 center=(
                     random.randint(game_screen.screen_height + 20, game_screen.screen_width + 700),
                     random.randint(0, game_screen.screen_height),
@@ -28,4 +28,4 @@ class Candy(pygame.sprite.Sprite):
         
         
     def blit_me(self):
-        self.screen.blit(self.candy, self.rect)
+        self.screen.blit(self.enemy, self.rect)
