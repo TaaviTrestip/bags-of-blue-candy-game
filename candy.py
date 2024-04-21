@@ -9,8 +9,8 @@ class Candy(pygame.sprite.Sprite):
         self.screen = screen
         self.screen_rect = screen.get_rect()
         
-        self.candy = pygame.Surface((50, 50))
-        self.candy.fill((0, 255, 255))
+        self.candy_orig = pygame.image.load("game_textures/Blue_crystal_candy.png").convert_alpha()
+        self.candy = pygame.transform.scale(self.candy_orig, (50, 60))
         self.rect = self.candy.get_rect()
         
         self.rect = self.candy.get_rect(

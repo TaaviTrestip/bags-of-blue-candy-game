@@ -13,7 +13,7 @@ class Player(pygame.sprite.Sprite):
 
         # Load player texture and resize
         self.player_orig = pygame.image.load("game_textures/Walter.png").convert_alpha()
-        self.player = pygame.transform.scale(self.player_orig, (50, 60))
+        self.player = pygame.transform.scale(self.player_orig, (50, 70))
         self.rect = self.player.get_rect()
 
         self.moving_right = False
