@@ -15,14 +15,15 @@ class Enemy(pygame.sprite.Sprite):
         
         self.rect = self.enemy.get_rect(
                 center=(
-                    random.randint(game_screen.screen_height + 20, game_screen.screen_width + 700),
+                    random.randint(game_screen.screen_height + 20, game_screen.screen_width + 500),
                     random.randint(0, game_screen.screen_height),
                 )
             )
         
+        self.speed = stats.enemy_speed
         
     def update(self):
-        self.rect.move_ip(-5, 0)
+        self.rect.move_ip(-self.speed, 0)
         if self.rect.right < 0:
             self.kill()
         

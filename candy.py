@@ -15,7 +15,7 @@ class Candy(pygame.sprite.Sprite):
         
         self.rect = self.candy.get_rect(
                 center=(
-                    random.randint(game_screen.screen_height + 20, game_screen.screen_width + 700),
+                    random.randint(game_screen.screen_height + 20, game_screen.screen_width + 500),
                     random.randint(0, game_screen.screen_height),
                 )
             )
