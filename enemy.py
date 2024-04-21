@@ -9,8 +9,8 @@ class Enemy(pygame.sprite.Sprite):
         self.screen = screen
         self.screen_rect = screen.get_rect()
         
-        self.enemy = pygame.Surface((75, 75))
-        self.enemy.fill((255, 0, 0))
+        self.enemy_orig = pygame.image.load("game_textures/Agent_hank.png").convert_alpha()
+        self.enemy = pygame.transform.scale(self.enemy_orig, (60, 80))
         self.rect = self.enemy.get_rect()
         
         self.rect = self.enemy.get_rect(

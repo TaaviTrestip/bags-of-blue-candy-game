@@ -87,6 +87,11 @@ def update_screen(game_screen, screen, player, candies, clock, stats, play_butto
     screen.fill(game_screen.background)
     player.blit_me()
     
+    # Display score at the top left corner
+    font = pygame.font.SysFont(None, 36)
+    score_text = font.render("Score: " + str(stats.score), True, (0, 0, 0))
+    screen.blit(score_text, (10, 10))
+    
     if len(candies) > 0:
         for candy in candies:
             candy.blit_me()
@@ -99,8 +104,7 @@ def update_screen(game_screen, screen, player, candies, clock, stats, play_butto
     if not stats.game_active:
         play_button.draw_button()
     pygame.display.flip()
-    
-    
+
 def save_score_and_quit(stats):
     stats.highscore_update(stats.score)
     sys.exit()
