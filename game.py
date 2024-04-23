@@ -1,6 +1,7 @@
 import pygame
 import sys
-import music
+import threading
+from music import play_music
 from math import *
 from game_window import GameWindow
 from button import Button
@@ -25,7 +26,11 @@ def run_game():
     
     candies = pygame.sprite.Group()
     enemies = pygame.sprite.Group()
-    
+
+    music_thread = threading.Thread(target=play_music)
+    music_thread.daemon = True
+    music_thread.start()
+
     while True:
         functions.check_events(game_screen, screen, player, candies, stats, play_button, enemies)
         if stats.game_active:
