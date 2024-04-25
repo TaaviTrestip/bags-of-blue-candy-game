@@ -3,6 +3,7 @@ import pygame
 from candy import Candy
 from enemy import Enemy
 from game_stats import GameStats
+from end_screen import EndScreen
 
 spawn_rates = GameStats()
 
@@ -16,7 +17,8 @@ pygame.time.set_timer(ADDENEMY, spawn_rates.enemy_spawn_rate)
 def check_events(game_screen, screen, player, candies, stats, play_button, enemies):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            save_score_and_quit(stats)
+            save_score(stats)
+            sys.exit()
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 player.moving_right = True
@@ -77,17 +79,23 @@ def create_enemy(game_screen, screen, enemies, stats):
     enemies.add(new_enemy)
 
 
-def update_enemies(player, enemies, stats, game_screen):
+import pygame
+
+def update_enemies(player, enemies, stats, game_screen, screen, play_button):
     hitted_enemy = pygame.sprite.spritecollideany(player, enemies)
-    if hitted_enemy != None:
-        save_score_and_quit(stats)
+    if hitted_enemy is not None and not stats.game_end:
+        pygame.mixer.music.stop()
         
+        stats.game_active = False
+        stats.game_end = True
+
+        pygame.mixer.Sound("End.mp3").play()
+        save_score(stats)
         
 def update_screen(game_screen, screen, player, candies, clock, stats, play_button, enemies):
     screen.fill(game_screen.background)
     player.blit_me()
     
-    # Display score at the top left corner
     font = pygame.font.SysFont(None, 36)
     score_text = font.render("Score: " + str(stats.score), True, (0, 0, 0))
     screen.blit(score_text, (10, 10))
@@ -102,9 +110,18 @@ def update_screen(game_screen, screen, player, candies, clock, stats, play_butto
             
     clock.tick(30)
     if not stats.game_active:
-        play_button.draw_button()
+        if not stats.game_end:
+            picture = pygame.image.load("game_textures/Start_screen.jpg").convert_alpha()
+            picture = pygame.transform.scale(picture, (game_screen.screen_width, game_screen.screen_height))
+            screen.blit(picture, (0, 0))
+            play_button.draw_button()
+        else:
+            screen.fill(game_screen.background)
+            end_screen = EndScreen(screen, stats, play_button)
+            end_screen.draw(stats)
+            pygame.display.flip()
+
     pygame.display.flip()
 
-def save_score_and_quit(stats):
+def save_score(stats):
     stats.highscore_update(stats.score)
-    sys.exit()
