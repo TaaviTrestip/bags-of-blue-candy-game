@@ -1,7 +1,9 @@
 import pygame
 import sys
 import threading
-from music import play_music
+import game_functions as functions
+import os
+from music import Music
 from math import *
 from game_window import GameWindow
 from button import Button
@@ -9,7 +11,8 @@ from player import Player
 from candy import Candy
 from enemy import Enemy
 from game_stats import GameStats
-import game_functions as functions
+from end_screen import EndScreen
+
 
 
 def run_game():
@@ -27,21 +30,25 @@ def run_game():
     candies = pygame.sprite.Group()
     enemies = pygame.sprite.Group()
 
-    music_thread = threading.Thread(target=play_music)
-    music_thread.daemon = True
-    music_thread.start()
+    end_screen = EndScreen(screen, stats, play_button)
+
+    my_music = Music()
+    my_music.play()
 
     while True:
-        functions.check_events(game_screen, screen, player, candies, stats, play_button, enemies)
+        functions.check_events(game_screen, screen, player, candies, stats, play_button, enemies, )
         if stats.game_active:
             player.update()
             functions.update_candies(player, candies, stats, game_screen)
             candies.update()
-            functions.update_enemies(player, enemies, stats, game_screen)
+            functions.update_enemies(player, enemies, stats, game_screen, screen, play_button)
             enemies.update()
         else:
-            candies.empty()
-            enemies.empty()
+            functions.update_enemies(player, enemies, stats, game_screen, screen, play_button)
         functions.update_screen(game_screen, screen, player, candies, clock, stats, play_button, enemies)
+
+
+        if stats.game_end:
+            end_screen.draw(stats)
         
 run_game()
