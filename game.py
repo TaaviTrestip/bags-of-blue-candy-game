@@ -36,7 +36,7 @@ def run_game():
     my_music.play()
 
     while True:
-        functions.check_events(game_screen, screen, player, candies, stats, play_button, enemies, )
+        functions.check_events(game_screen, screen, player, candies, stats, play_button, enemies)
         if stats.game_active:
             player.update()
             functions.update_candies(player, candies, stats, game_screen)

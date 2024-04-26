@@ -6,9 +6,9 @@ class GameStats():
         
         
     def reset_stats(self):
-        self.enemy_spawn_rate = 5000
+        self.enemy_spawn_rate = 7500
         self.enemy_speed = 2
-        self.candy_spawn_rate = 2000
+        self.candy_spawn_rate = 3000
         
         self.score = 0
         self.checker_idk = 15
